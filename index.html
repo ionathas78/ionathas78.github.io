@@ -6,6 +6,44 @@
     <title>Jonathan Andrews</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style type="text/CSS">
+        /* Extra small devices (portrait phones, less than 576px) */
+        @media (max-width: 575px) { 
+            #about-me-figure {
+                width: 300px;
+            }
+            .figure-img {
+                clear: both;
+                align-self: center;
+            }
+         }
+
+        /* Small devices (landscape phones, 576px and up) */
+        @media (min-width: 576px) and (max-width: 767px) {
+            #about-me-figure {
+                width: 400px;
+            }
+            .figure-img {
+                clear: both;
+                align-self: center;
+            }
+        }
+
+        /* Medium devices (tablets, 768px and up) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            #about-me-figure {
+                width: 500px;
+            }
+        }
+
+        /* Large devices (desktops, 992px and up) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            #about-me-figure {
+                width: 600px;
+            }
+        }
+        
+    </style>
 </head>
 <body style="background-color: #ccc">
     <header>
@@ -14,8 +52,8 @@
               <a class="nav-link active" href="#" style="color: white;">Jonathan Andrews</a>
             </li>
         </ul>
-        <ul class="nav col-sm-12 col-med-9 col-lg-9 float-left" style="background-color: #888; flex-direction: row-reverse;">
-            <li class="nav-item">
+        <ul class="nav col-sm-12 col-med-9 col-lg-9 flex-row-reverse float-left" style="background-color: #888;">
+                <li class="nav-item">
               <a class="nav-link active" href="index.html" style="background-color: #777; color: #eee;">About</a>
             </li>
             <li class="nav-item">
@@ -30,14 +68,14 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <div class="container clearfix" style="width: 50vw; max-width: 900px; background-color: white; margin-top: 2vw;">
-                    <h2 style="color: rgb(0, 200, 150); font-family: Georgia, 'Times New Roman', Times, serif; font-weight: 300%;">About Me</h2>
+            <div class="col-lg-6 col-md-8 col-sm-10 col-xs-12">
+                <div id="about-me-figure" class="figure clearfix mt-3" style="background-color: white;">
+                    <h2 class="ml-2 mt-2" style="color: rgb(0, 200, 150); font-family: Georgia, 'Times New Roman', Times, serif; font-weight: 300%;">About Me</h2>
                     <hr>
-                    <img src="https://via.placeholder.com/150" class="float-left" alt="My Index Pic" style="margin: 10px 10px;">
-                        <div class="card-body">
-                      <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>   
-                    </div>
+                    <img src="https://via.placeholder.com/250" class="figure-img float-left mx-3 mt-1 mb-3" alt="My Index Pic" >
+                    <!-- <div class="card-body"> -->
+                      <p class="figure-caption mx-2">Greetings and salutations! All things told, I'm a pretty boring person; but my portfolio is dope. Check it out to see why!</p>   
+                    <!-- </div> -->
                   </div>                  
             </div>  
         </div>
