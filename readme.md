@@ -19,6 +19,6 @@ WHEN I consider elements important to SEO consideration
 THEN I find robust, concise design flow
 
 ##Screenshots
-![index page](./assets/Images/portfolio-index.png)
-![gallery page](./assets/Images/portfolio-gallery.png)
-![contact page](./assets/Images/portfolio-contact.png)
+![index page](./Assets/Images/portfolio-index.png)
+![gallery page](./Assets/Images/portfolio-gallery.png)
+![contact page](./Assets/Images/portfolio-contact.png)
