@@ -3,6 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&family=Ubuntu&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/reset.css">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+    <header>
+        <!-- Motion Background from https://wweb.dev/resources/animated-css-background-generator -->
+        <!-- Credit: Louis Hoebregts -->
+        <span class="spore"></span>
+        <span class="spore"></span>
+        <span class="spore"></span>
+        <span class="spore"></span>
+
+        <nav>
+            <div id="title-block"><span>j</span>Andrews</div>
+            <ul>
+                <li class="link"><a href="index.html">Home</a></li>
+                <li class="link"><a id="about-link" onclick="openAbout()">About</a></li>
+                <li class="active-link"><a href="#">Portfolio</a></li>
+                <li class="link"><a href="contact.html">Contact</a></li>\
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="portfolio-gallery">
+            <article class="photo-card" style="height: 200px; width: 200px;">
+                <figure class="photo-card-image"
+                    style="background-image: url(https://via.placeholder.com/150); background-size: cover;"
+                ></figure>
+                <figcaption class="photo-card-caption">
+                    <p>Test Image</p>
+                </figcaption>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2020 by Jonathan Andrews<span id="footer-name"></span></p>
+        <!-- Motion Background from https://wweb.dev/resources/animated-css-background-generator -->
+        <!-- Credit: Louis Hoebregts -->
+        <span class="spore"></span>
+        <span class="spore"></span>
+        <span class="spore"></span>
+        <span class="spore"></span>
+    </footer>
+
+
+    <!-- Popup Form -->
+
+    <section class="popup-form">
+        <div id="form-about">
+          <form class="form-container">
+            <h1>About</h1>
+            <hr>
+            <h2>My Portfolio</h2>
+            <p>&copy; 2020 Jonathan Andrews</p>
+            <hr>
+            <p style="font-style: italic;">Footer Background Effect by <a target="_blank" href="https://wweb.dev/resources/animated-css-background-generator">Louis Hoebregts</a></p>
+            <hr>
+            <button id="close-about-btn" class="pop-btn" type="submit" onclick="closeAbout()">Close</button>
+          </form>
+        </div>
+      </section>
+
+    <!-- Script Calls -->
+
+    <script type="text/javascript" src="assets/logic.js"></script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jonathan Andrews</title>
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -78,11 +157,11 @@
 
     <div class="container">
         <!-- <div class="row mb-4" style="clear:both; margin-bottom: 60px;"> -->
-        <div class="row mb-5" style="clear:both;">
+        <!-- <div class="row mb-5" style="clear:both;">
             <div class="col-sm-10 col-md-9 col-lg-8">
                 <div class="container clearfix" style="background-color: white;">
                     <!-- <ul class="list-group list-group-horizontal float-left"> -->
-                    <ul class="align-items-center">
+                    <!-- <ul class="align-items-center">
                         <li class="list-group-item float-left">
                             <div class="container">
                                 <a style="position: relative;" href="fanSite.html" target="_blank"><img src="https://via.placeholder.com/250" alt="Placeholder Item Image"/></a>
@@ -128,11 +207,11 @@
         <p style="line-height: 200%; text-align: center;">
             (C) Copyright 2020
         </p> 
-    </footer>
+    </footer> -->
 
     <!-- JS Scripts -->
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
@@ -140,4 +219,4 @@
     <script src="rps.js" type="text/javascript"></script>
     <script src="eatSteak.js" type="text/javascript"></script>
 </body>
-</html>
+</html> --> 

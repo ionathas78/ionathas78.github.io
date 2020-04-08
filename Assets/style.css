@@ -1,0 +1,348 @@
+* {
+    box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 2vw;
+}
+
+/* text */
+h1 {
+    font-size: 3vw;
+    line-height: 3.25vw;
+    font-weight: bolder;
+}
+h2 {
+    font-size: 2.25vw;
+    line-height: 2.5vw;
+    font-weight: bold;
+}
+p {
+    font-size: 1.75vw;
+    line-height: 2vw;
+}
+
+/*          -- Header Section --    */
+
+header {
+    position: fixed;
+    width: 100vw;
+    height: 8vh;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+    background-color: #00f;
+}
+
+nav {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 0;
+}
+
+#title-block {
+    font-family: fantasy;
+    font-weight: 200;
+    font-size: 3vw;
+    background-color: #007;
+    color: #cce;
+    padding: 2vh 2vw;
+    height: 100%;
+    z-index: 2;
+}
+
+#title-block span {
+    color: #cbe;
+}
+
+header ul {
+    display: inline-flex;
+    padding: 1.5vw;
+    list-style: none;
+    height: 100%;
+}
+
+.link {
+    height: 100%;
+    margin: 0 2vh;
+}
+
+.link a {
+    color: #eee;
+    font-size: 2.25vw;
+    text-decoration: none;
+    z-index: 2;
+}
+
+.active-link {
+    justify-content: center;
+    height: 100%;
+    margin: 0 2vh;
+}
+
+.active-link a {
+    color: #999;
+    font-size: 2.5vw;
+    text-decoration: none;
+    cursor: default;
+}
+
+/*          --- Main Section ---         */
+
+main {
+    z-index: -2;
+}
+
+/*          --- Footer Section ---      */
+
+footer {
+    position: fixed;
+    cursor: default;
+    width: 100vw;
+    height: 4vh;
+    bottom: 0;
+    left: 0;
+    background: #00f;
+    color: #eee;
+    text-align: center;
+    overflow: hidden;
+    z-index: -2;
+}
+
+/*          --- Class Styles ---        */
+
+.card {
+    position: relative;
+    left: 0;
+    top: 0;
+    border: 2px solid #666;
+    background: #dde;
+    color: #000;
+}
+
+.card-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15%;
+    width: 100%;
+    padding: 1vh 2vw;
+    background: #00e;
+    color: #eee;
+    text-align: center;
+}
+
+.card-body {
+    position: absolute;
+    top: 15%;
+    left: 0;
+    height: 75%;
+    width: 100%;
+    padding: 1vh 2vw;
+}
+
+.card-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 10%;
+    width: 100%;
+    padding: 1vh 2vw;
+}
+
+.photo-card {
+    position: relative;
+    top: 0;
+    left: 0;
+    border: 2px solid #666;
+    background-color: #eee;
+    color: #000;
+    margin: 1vw;
+    padding: 1vw;
+}
+
+.photo-card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 70%;
+    width: 90%;
+    margin: 5%;
+    align-content: center;
+    border: 1px solid #444;
+}
+
+.photo-card-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 25%;
+    width: 100%;
+    padding: 1vw;
+    font-family: 'Rock Salt', sans-serif;
+    text-align: center;
+}
+
+/*          --- Individual ID Styles ---            */
+
+#about-me-card {
+    top: 25vh; 
+    left: 15vw; 
+    height: 60vh; 
+    width: 70vw;
+}
+
+#portfolio-gallery {
+    position: relative; 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    top: 10vh; 
+    left: 5vw; 
+    height: 80vh; 
+    width: 80vw; 
+    border: 5px groove #555;
+    padding: 1vw;
+    background-color: #66c;
+}
+
+/*          --- Pseudoelement Styles ---        */
+
+.link a:hover {
+    color: #cec;
+    cursor: pointer;
+    text-shadow: 1vw 1vw 1vw #333;
+}
+
+.card:hover {
+    box-shadow: 2vw 2vw 5vw #333;
+}
+
+/*          -- About Form --        */
+
+/* Position the Popup form */
+.popup-form {
+    position: relative;
+    text-align: center;
+    width: 100%;
+}
+
+/* Hide the About form */
+#form-about {
+    display: none;
+    position: fixed;
+    left: 40%;
+    top:25%;
+    transform: translate(-45%,5%);
+    border: 2px solid #666;
+    border-radius: 5px;
+    box-shadow: 2vw 2vw 5vw #333;
+    z-index: 9;
+    opacity: 95%;
+}
+/* Styles for the form container */
+.form-container {
+    max-width: 300px;
+    padding: 2vw;
+    background-color: #eef;
+    border-radius: 5px;
+    line-height: 2.5vw;
+    font-size: 1.6vw;
+}
+/* Style submit/login button */
+.form-container .pop-btn {
+    align-self: center;
+    background-color: #5a5;
+    color: #eee;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    margin: 3vh 2vw;
+    opacity: 0.8;
+}
+
+/* Hover effects for buttons */
+.form-container:hover {
+    opacity: 1;
+}
+
+
+
+
+/*          -- Background Section --   
+    Motion background from https://wweb.dev/resources/animated-css-background-generator  
+        Credit: Louis Hoebregts */
+
+@keyframes move {
+    100% {
+        transform: translate3d(0, 0, 1px) rotate(360deg);
+    }
+}
+
+.spore {
+    width: 5vmin;
+    height: 5vmin;
+    border-radius: 5vmin;
+    backface-visibility: hidden;
+    position: absolute;
+    animation: move;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    z-index: 1;
+}
+
+footer span:nth-child(0) {
+    color: #906;
+    transform-origin: -11vw -19vh;
+    box-shadow: -40vmin 0 5.128305038155363vmin currentColor;
+}
+
+footer span:nth-child(1) {
+    color: #aaf;
+    transform-origin: 3vw 14vh;
+    box-shadow: -40vmin 0 5.5303274119170713vmin currentColor;
+}
+
+footer span:nth-child(2) {
+    color: #3c6;
+    transform-origin: -5vw -17vh;
+    box-shadow: -40vmin 0 5.821762757523849vmin currentColor;
+}
+
+footer span:nth-child(3) {
+    color: #bb8;
+    transform-origin: 4vw 17vh;
+    box-shadow: -40vmin 0 5.16104958843262vmin currentColor;
+}
+
+header span:nth-child(0) {
+    color: #805;
+    transform-origin: -11vw -19vh;
+    box-shadow: -40vmin 0 5.128305038155363vmin currentColor;
+}
+
+header span:nth-child(1) {
+    color: #99e;
+    transform-origin: 3vw 14vh;
+    box-shadow: -40vmin 0 5.5303274119170713vmin currentColor;
+}
+
+header span:nth-child(2) {
+    color: #2b5;
+    transform-origin: -5vw -17vh;
+    box-shadow: -40vmin 0 5.821762757523849vmin currentColor;
+}
+
+header span:nth-child(3) {
+    color: #aa7;
+    transform-origin: 4vw 17vh;
+    box-shadow: -40vmin 0 5.16104958843262vmin currentColor;
+}
+
+/* Media Query section */
+
+@media (max-width: 400px) {
+    #about-me-card {
+        height: 25vh;
+    }
+}
