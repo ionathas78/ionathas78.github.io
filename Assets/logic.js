@@ -3,8 +3,10 @@
 const _FORM_OPAQUE = 0.95;
 const _FORM_TRANSLUCENT = 0.85;
 
-const _FOOTER_DIV = document.querySelector("footer");
+const _KEYDOWN_ENTER = 13;
+const _KEYDOWN_ESCAPE = 27;
 
+const _FOOTER_DIV = document.querySelector("footer");
 const _FOOTER_NAMELIST = ["seeker of grits", "player of roles", "writer of boring things", "astronomicus stupendous",
 "paladin of palindromes", "bard of busyness", "rocketjock within my own mind", "speaker of puns",
 "tinker of toys", "wizard with a cause", "have pen, will cybercommute", "peddler of pastels", "moribund mystick",
@@ -85,12 +87,45 @@ function lowerFormOpacity(targetForm) {
 };
 
 /**
- * Adds to name in footer
+ * Displays a popup Alert modal dialogue
+ * N.B. -- uses the #form-modal-confirm popup.
+ * @param {Function} callbackFunction Single-parameter Function to return value (i.e., function (retVal))
+ * @param {Text} formText Multi-line Text for modal form (delimit linefeeds with '\n')
+ * @param {Text} formTitle One-line Title for modal form ('Confirm' by default)
+ * @param {Text} formSubtitle One-line Subtitle for modal form ('-----' by default)
  */
-function expandFooterName() {
-    let spanName = document.getElementById("footer-name");
-    let randomName = _FOOTER_NAMELIST[Math.floor(Math.random() * _FOOTER_NAMELIST.length)];
-    spanName.textContent = ", " + randomName;
+function modalAlert(callbackFunction, formText, formTitle, formSubtitle) {
+    let titleTag = document.getElementById("confirm-title");
+    let subtitleTag = document.getElementById("confirm-subtitle");
+    let textTag = document.getElementById("confirm-text");
+    let trueBtn = document.getElementById("confirm-btn-true");
+    let falseBtn = document.getElementById("confirm-btn-false");
+    let cancelBtn = document.getElementById("confirm-btn-cancel");
+
+    _alertCallback = callbackFunction;
+    
+    if ((formTitle) && (typeof(formTitle) == "string")) {
+        titleTag.textContent = formTitle;
+    };
+    if ((formSubtitle) && (typeof(formSubtitle) == "string")) {
+        subtitleTag.textContent = formSubtitle;
+    };
+    if ((formText) && (typeof(formText) == "string")) {
+        let innerText = formText.replace(/<br>/gim, "\n");
+        let splitText = innerText.split("\n");
+        splitText.forEach(textLine => {
+            let childElement = document.createElement("p");
+            childElement.textContent = textLine;
+            textTag.appendChild(childElement);
+        });
+    };
+    trueBtn.style.display = "none";
+    falseBtn.style.display = "none";
+    cancelBtn.textContent = "Close";
+
+    openConfirm();
+
+    cancelBtn.addEventListener("click", alertOnClick);
 };
 
 /**
@@ -139,98 +174,6 @@ function modalConfirm(callbackFunction, formText, formTitle, formSubtitle, formT
     trueBtn.addEventListener("click", confirmOnClick);
     falseBtn.addEventListener("click", confirmOnClick);
     cancelBtn.addEventListener("click", confirmOnClick);
-};
-
-/**
- * Return function for modal Confirm form
- * @param {Object} event Mandatory click event for Listener functions
- */
-function confirmOnClick(event) {
-    event.preventDefault();
-
-    let returnValue = null;
-
-    let trueBtn = document.getElementById("confirm-btn-true");
-    let falseBtn = document.getElementById("confirm-btn-false");
-    let cancelBtn = document.getElementById("confirm-btn-cancel");
-    
-    if (event.target === trueBtn) {
-        returnValue = true;
-    } else if (event.target === falseBtn) {
-        returnValue = false;
-    };
-
-    trueBtn.removeEventListener("click", confirmOnClick);
-    falseBtn.removeEventListener("click", confirmOnClick);
-    cancelBtn.removeEventListener("click", confirmOnClick);
-    closeConfirm();
-
-    _confirmCallback(returnValue);
-};
-
-/**
- * Displays a popup Alert modal dialogue
- * N.B. -- uses the #form-modal-confirm popup.
- * @param {Function} callbackFunction Single-parameter Function to return value (i.e., function (retVal))
- * @param {Text} formText Multi-line Text for modal form (delimit linefeeds with '\n')
- * @param {Text} formTitle One-line Title for modal form ('Confirm' by default)
- * @param {Text} formSubtitle One-line Subtitle for modal form ('-----' by default)
- */
-function modalAlert(callbackFunction, formText, formTitle, formSubtitle) {
-    let titleTag = document.getElementById("confirm-title");
-    let subtitleTag = document.getElementById("confirm-subtitle");
-    let textTag = document.getElementById("confirm-text");
-    let trueBtn = document.getElementById("confirm-btn-true");
-    let falseBtn = document.getElementById("confirm-btn-false");
-    let cancelBtn = document.getElementById("confirm-btn-cancel");
-
-    _alertCallback = callbackFunction;
-    
-    if ((formTitle) && (typeof(formTitle) == "string")) {
-        titleTag.textContent = formTitle;
-    };
-    if ((formSubtitle) && (typeof(formSubtitle) == "string")) {
-        subtitleTag.textContent = formSubtitle;
-    };
-    if ((formText) && (typeof(formText) == "string")) {
-        let innerText = formText.replace(/<br>/gim, "\n");
-        let splitText = innerText.split("\n");
-        splitText.forEach(textLine => {
-            let childElement = document.createElement("p");
-            childElement.textContent = textLine;
-            textTag.appendChild(childElement);
-        });
-    };
-    trueBtn.style.display = "none";
-    falseBtn.style.display = "none";
-    cancelBtn.textContent = "Close";
-
-    openConfirm();
-
-    cancelBtn.addEventListener("click", alertOnClick);
-};
-
-/**
- * Return function for modal Alert form
- * N.B. -- Uses the #form-modal-confirm popup
- * @param {Object} event Mandatory click event for Listener functions
- */
-function alertOnClick(event) {
-    event.preventDefault();
-
-    let trueBtn = document.getElementById("confirm-btn-true");
-    let falseBtn = document.getElementById("confirm-btn-false");
-    let cancelBtn = document.getElementById("confirm-btn-cancel");
-    
-    closeConfirm();
-
-    cancelBtn.textContent = "Cancel";
-
-    trueBtn.style.display = "block";
-    falseBtn.style.display = "block";
-    cancelBtn.removeEventListener("click", alertOnClick);
-    
-    _alertCallback();
 };
 
 /**
@@ -283,6 +226,73 @@ function modalPrompt(callbackFunction, formText, formDefault, formTitle, formSub
     userInput.addEventListener("keydown", promptOnKeyDown);
 };
 
+
+/**
+ * Sets up the floating spore elements in the header and footer
+ */
+function setSpanOrigins() {
+    let spanList = document.querySelectorAll(".spore");
+
+    spanList.forEach(function (element) {
+        element.style.left = (Math.floor(Math.random() * 100)) + "%";
+        element.style.top = (Math.floor(Math.random() * 100)) + "%";
+        element.style.animationDuration = (Math.floor(Math.random() * 200 + 100)) + "s";
+        element.style.animationDelay = (-1 * Math.floor(Math.random() * 100 + 50)) + "s";
+    });
+};
+
+//  **  Events
+
+/**
+ * Return function for modal Alert form
+ * N.B. -- Uses the #form-modal-confirm popup
+ * @param {Object} event Mandatory click event for Listener functions
+ */
+function alertOnClick(event) {
+    event.preventDefault();
+
+    let trueBtn = document.getElementById("confirm-btn-true");
+    let falseBtn = document.getElementById("confirm-btn-false");
+    let cancelBtn = document.getElementById("confirm-btn-cancel");
+    
+    closeConfirm();
+
+    cancelBtn.textContent = "Cancel";
+
+    trueBtn.style.display = "block";
+    falseBtn.style.display = "block";
+    cancelBtn.removeEventListener("click", alertOnClick);
+    
+    _alertCallback();
+};
+
+/**
+ * Return function for modal Confirm form
+ * @param {Object} event Mandatory click event for Listener functions
+ */
+function confirmOnClick(event) {
+    event.preventDefault();
+
+    let returnValue = null;
+
+    let trueBtn = document.getElementById("confirm-btn-true");
+    let falseBtn = document.getElementById("confirm-btn-false");
+    let cancelBtn = document.getElementById("confirm-btn-cancel");
+    
+    if (event.target === trueBtn) {
+        returnValue = true;
+    } else if (event.target === falseBtn) {
+        returnValue = false;
+    };
+
+    trueBtn.removeEventListener("click", confirmOnClick);
+    falseBtn.removeEventListener("click", confirmOnClick);
+    cancelBtn.removeEventListener("click", confirmOnClick);
+    closeConfirm();
+
+    _confirmCallback(returnValue);
+};
+
 /**
  * Return function for modal Prompt form
  * @param {Object} event Mandatory click event for Listener functions
@@ -315,7 +325,7 @@ function promptOnClick(event) {
  * @param {Object} event Mandatory keydown event for Listener functions
  */
 function promptOnKeyDown(event) {
-    if (event.keycode != 15) {
+    if (!((event.keyCode == _KEYDOWN_ENTER) || (event.keyCode == _KEYDOWN_ESCAPE))) {       
         return;
     }
 
@@ -324,7 +334,11 @@ function promptOnKeyDown(event) {
     let userInput = event.target;
     let submitBtn = document.getElementById("prompt-btn-submit");
     let cancelBtn = document.getElementById("prompt-btn-cancel");
-    let returnValue = userInput.value;
+    let returnValue = null;
+
+    if (event.keyCode == _KEYDOWN_ENTER) {                                      
+        returnValue = userInput.value;
+    }
     
     submitBtn.removeEventListener("click", promptOnClick);
     cancelBtn.removeEventListener("click", promptOnClick);
@@ -335,24 +349,16 @@ function promptOnKeyDown(event) {
 };
 
 /**
- * Sets up the floating spore elements in the header and footer
+ * Expands on name in footer
  */
-function setSpanOrigins() {
-    let spanList = document.querySelectorAll(".spore");
-
-    spanList.forEach(function (element) {
-        element.style.left = (Math.floor(Math.random() * 100)) + "%";
-        element.style.top = (Math.floor(Math.random() * 100)) + "%";
-        element.style.animationDuration = (Math.floor(Math.random() * 200 + 100)) + "s";
-        element.style.animationDelay = (-1 * Math.floor(Math.random() * 100 + 50)) + "s";
-    });
+function footerOnClick() {
+    let spanName = document.getElementById("footer-name");
+    let randomName = _FOOTER_NAMELIST[Math.floor(Math.random() * _FOOTER_NAMELIST.length)];
+    spanName.textContent = ", " + randomName;
 };
-
-//  **  Events
-
 
 
 //  **  Logic
 
-_FOOTER_DIV.addEventListener("click", expandFooterName);
+_FOOTER_DIV.addEventListener("click", footerOnClick);
 setSpanOrigins();
