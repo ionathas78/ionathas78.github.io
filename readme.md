@@ -5,7 +5,7 @@
 
 I built a web site with three basic pages (an index, a contact page, and a page
 to show off a gallery of my projects) using mobile responsive design processes. 
-It leveraged a static navbar header and a footer with adaptive content that used 
+It leveraged a static navbar header and footer with adaptive content that used 
 media queries to shift and fit the viewer's screen size.
 
 ## Design Values
