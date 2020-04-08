@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Portfolio</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&family=Ubuntu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&family=Ubuntu&family=Indie+Flower&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="Assets/reset.css">
     <link rel="stylesheet" href="Assets/style.css">
@@ -67,7 +67,7 @@
 
             <article class="photo-card">
                 <figure class="photo-card-image">
-                    <a href="#" onclick="quiz10()">
+                    <a href="#" onclick="startQuiz10()">
                         <img src="https://via.placeholder.com/150"
                             target="_blank"
                             alt="Placeholder Image"
@@ -150,13 +150,13 @@
             <form class="form-container">
             <h1 id="confirm-title">Confirm</h1>
             <hr>
-            <h2 id="confirm-subtitle">----------------------------</h2>
+            <h2 id="confirm-subtitle">* * *</h2>
             <div id="confirm-text">
                 <!-- Text goes here -->
             </div>
             <hr>
-            <button id="confirm-btn-true" class="pop-btn modal-btn" type="submit" style="margin-bottom: 0.5vw;">True</button>
-            <button id="confirm-btn-false" class="pop-btn modal-btn" type="cancel" style="margin-bottom: 0.5vw;">False</button>
+            <button id="confirm-btn-true" class="pop-btn modal-btn" type="submit" style="display: inline; margin-bottom: 0.5vw;">True</button>
+            <button id="confirm-btn-false" class="pop-btn modal-btn" type="cancel" style="display: inline; margin-bottom: 0.5vw;">False</button>
             <br>
             <button id="confirm-btn-cancel" class="pop-btn modal-btn" type="cancel" style="margin-top: 0.5vw;">Cancel</button>
             </form>
@@ -168,15 +168,15 @@
             <form class="form-container">
             <h1 id="prompt-title">Confirm</h1>
             <hr>
-            <h2 id="prompt-subtitle">----------------------------</h2>
+            <h2 id="prompt-subtitle">* * *</h2>
             <div id="prompt-text">
                 <!-- Text goes here -->
             </div>
             <hr>
             <input id="prompt-input" class="modal-input" type="text" style="width: auto;">
             <br>
-            <button id="prompt-btn-submit" class="pop-btn modal-btn" type="submit" style="margin-bottom: 0.5vw;">Submit</button>
-            <button id="prompt-btn-cancel" class="pop-btn modal-btn" type="cancel" style="margin-bottom: 0.5vw;">Cancel</button>
+            <button id="prompt-btn-submit" class="pop-btn modal-btn" type="submit">Submit</button>
+            <button id="prompt-btn-cancel" class="pop-btn modal-btn" type="cancel">Cancel</button>
             </form>
         </div>
     </section>
@@ -184,6 +184,7 @@
     
     <!-- Script Calls -->
 
+    <script type="text/javascript" src="q10_questions.js"></script>
     <script type="text/javascript" src="quiz10.js"></script>
     <script type="text/javascript" src="Assets/logic.js"></script>
     <!-- <script type="text/javascript">modalConfirm(response => alert(response), "Testing\n1...\n2....<br>3.....", null, null, null, null)</script> -->

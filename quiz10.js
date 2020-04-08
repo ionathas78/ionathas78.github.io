@@ -1,136 +1,176 @@
 // quiz10();
+//  Uses _questionSet[] from the q10_questions.js file
 
-function quiz10() {
+const _TRUNCATELENGTH_FORDISPLAY = 48;
+const _QUIZ10_TITLE = "quiz10"
 
-    //  Setup questions
-    var quiz10Array = [
-        //  Question - Type - Answer
-        //  'c' for a confirm (text) question, 'p' for a prompt (yes/no) question. 'a' to display an alert (Question won't be counted. Answer is disregarded).
-        //  Answer should be in lowercase.
-        /* - */ {question: "See if you can answer the following questions about the Dungeons & Dragons Roleplaying Game correctly:", type: "a", answer: null},
-        
-        /* 1 */ {question: "Faerun is the name of a major continent in the Forgotten Realms setting.", type: "c", answer: true},
-        /* 2 */ {question: "There have been 4 ability scores in the last three editions of D&D, grouped with half physical attributes and half mental or social attributes.", type: "c", answer: false},
-        /* 3 */ {question: "Corellon Latherian is the god of the elves.", type: "c", answer: true},
-        /* 4 */ {question: "Druids are primal champions connected to the spirits of the land they protect that wield divine spells and can transform into animals.", type: "c", answer: true},
-        /* 5 */ {question: "Since 2nd edition AD&D, the most common D&D alignment system has 2 axes: Good vs. Evil and Elves vs. Dwarves.", type: "c", answer: false},
-        /* 6 */ {question: "The Sword Coast is a busy region on the shores of the Sea of Fallen Stars. It's full of commerce and danger, and home to such cities as Waterdeep, Neverwinter, and Cormyr.", type: "c", answer: false},
-        /* 7 */ {question: "Drow are dark elves that live in a subterranean, matriarchal society and have the innate ability to cast certain magical spells.", type: "c", answer: true},
-        /* 8 */ {question: "A broadsword is any blade 9 inches or shorter that inflicts a d4 damage die for a human-sized wielder.", type: "c", answer: false},
-        /* 9 */ {question: "In 2nd edition D&D, only a human with a Charisma of 17 or 18 could be take the Paladin class.", type: "c", answer: true},
-        /* 10 */ {question: "A beholder is a terrifying aberration that has one enormous eye in the center of its round body, with ten eyestalks protruding from its head.", type: "c", answer: true},
-        
-        /* - */ {question: "And a bonus question:", type: "a", answer: null},
-        /* 11 */ {question: "In roleplaying games, a Die with 20 sides is called what?", type: "p", answer: "d20"},
-        
-        /* - */ {question: "Dungeons & Dragons, Forgotten Realms, and all associated names are the sole property of Wizards of the Coast.", type: "a", answer: null}
-    ];
+let _quiz10Questions = [];
+let _quiz10Correct = [];
+let _quiz10Answers = [];
+let _quiz10Results = [];
+let _quiz10Shuffle = [];
 
-    //  Variable declaration
-    const truncateLengthForDisplay = 48;
+let _correctCount = 0;
+let _questionIndex = -1;
+let _questionCount = 0;
+let _totalQuestions = 0;
 
-    var quiz10Questions = [];
-    var quiz10Correct = [];
-    var quiz10Answers = [];
-    var quiz10Results = [];
-    var quiz10Shuffle = [];
-    var quiz10ShuffleLock = [];
+/**
+ * Advances _questionIndex, sets up the next question, and asks it.
+ */
+function askNextQuestion() {
+    _questionIndex++;
 
-    var correctCount = 0;
-    var questionCount = 0;
-    var currentPrompt = "";
-    var currentType = "";
-    var currentAnswer = "";
-    var questionNumber = "";
-    var currentResponse;
-    var isQuestion = false;
+    if (_questionIndex == _quiz10Shuffle.length) {
+        endQuiz10();
+    };
 
-    //  Shuffle Questions
-    for (var i = 0; i < quiz10Array.length; i++) {
-        currentType = quiz10Array[i].type;
-        currentType = tokenizeType(currentType);
-        isQuestion = ((currentType == "c") || (currentType == "p"));
+    let arrayIndex = _quiz10Shuffle[_questionIndex];
+    let currentQuestion = _questionSet[arrayIndex];
+    let currentPrompt = currentQuestion.question;
+    let currentType = tokenizeType(currentQuestion.type);
+    let currentAnswer = tokenizeAnswer(currentQuestion.answer);
+    let isQuestion = ((currentType == "c") || (currentType == "p"));
+    let questionNumber;
 
-        quiz10Shuffle.push(i);
-        quiz10ShuffleLock.push(!isQuestion);
+    //  Set up current question
+    if (isQuestion) {                    
+        let truncatedQuestion = currentPrompt;
+        if (truncatedQuestion.length > _TRUNCATELENGTH_FORDISPLAY) {
+            truncatedQuestion = truncatedQuestion.substring(0, (_TRUNCATELENGTH_FORDISPLAY - 1)) + "...";
+        }
+
+        _questionCount++;
+        _quiz10Questions.push(truncatedQuestion);
+        _quiz10Correct.push(currentAnswer);
+        questionNumber = "Question #" + _questionCount + " / " + _totalQuestions + ":\n";
+    } else {
+        questionNumber = "*";
     }
+    // currentPrompt = questionNumber + currentPrompt.trim();
+    currentPrompt = currentPrompt.trim();
 
-    quiz10Shuffle = shuffleArray(quiz10Shuffle, quiz10ShuffleLock);
+    //  Execute current question.
+    switch (currentType) {
+        case "a":
+            //  Alert. Displays a message only. Doesn't count as a question.
+            modalAlert(alertCallback, currentPrompt, _QUIZ10_TITLE, questionNumber);
+            break;
 
-    //  Main Quiz loop
-    for (var j = 0; j < quiz10Shuffle.length; j++) {
-        arrayIndex = quiz10Shuffle[j];
+        case "c":
+            //  Confirm. Displays a Ok/Cancel prompt.
+            modalConfirm(confirmCallback, currentPrompt, _QUIZ10_TITLE, questionNumber, null, null);
+            break;
 
-        //  Set up current question.
-        currentPrompt = quiz10Array[arrayIndex].question;
-        currentType = quiz10Array[arrayIndex].type;
-        currentAnswer = quiz10Array[arrayIndex].answer;
-        
-        currentType = tokenizeType(currentType);
+        case "p":
+            //  Prompt. Displays a text prompt.
+            modalPrompt(promptCallback, currentPrompt, "", _QUIZ10_TITLE, questionNumber, null, null);
+            break;
 
-        currentAnswer = tokenizeAnswer(currentAnswer);
-        isQuestion = ((currentType == "c") || (currentType == "p"));
+        default:                        
+    };
+};
 
-        if (isQuestion) {                    
-            var truncatedQuestion = currentPrompt;
-            if (truncatedQuestion.length > truncateLengthForDisplay) {
-                truncatedQuestion = truncatedQuestion.substring(0, (truncateLengthForDisplay - 1)) + "...";
-            }
+/**
+ * Callback function for modal alerts
+ */
+function alertCallback() {
+    askNextQuestion();
+};
 
-            quiz10Questions.push(truncatedQuestion);
-            quiz10Correct.push(currentAnswer);
-            questionNumber = "Question #" + (questionCount + 1) + ":\n";
-        } else {
-            questionNumber = "";
-        }
-        currentPrompt = questionNumber + currentPrompt.trim();
-
-        //  Execute current question.
-        switch (currentType) {
-            case "a":
-                //  Alert. Displays a message only. Doesn't count as a question.
-                alert(currentPrompt);
-                currentAnswer = "";
-                currentResponse = "";
-                break;
-
-            case "c":
-                //  Confirm. Displays a Ok/Cancel prompt.
-                currentResponse = confirm(currentPrompt);
-                quiz10Answers.push(currentResponse);
-                break;
-
-            case "p":
-                //  Prompt. Displays a text prompt.
-                currentResponse = prompt(currentPrompt);
-                quiz10Answers.push(currentResponse);
-                currentResponse = tokenizeAnswer(currentResponse);
-                break;
-
-            default:                        
-        }
-
-        //  Evaluate answer.
-        if (isQuestion && currentResponse == currentAnswer) {
-            //  Answer is correct.
-            questionCount++;
-            correctCount++;
-            quiz10Results.push(true)
-
-        } else if (isQuestion && currentResponse != currentAnswer) {
-            //  Answer is incorrect.
-            questionCount++;
-            quiz10Results.push(false)
-        }
-    }
-
-    //  Report results
-    displayResults(quiz10Questions, quiz10Correct, quiz10Answers, quiz10Results, correctCount, questionCount);
+/**
+ * Callback function for modal confirms
+ * @param {Boolean} answerValue True/False Response from dialogue
+ */
+function confirmCallback(answerValue) {
+    let correctAnswer = _quiz10Correct[_quiz10Correct.length - 1];
+    _quiz10Answers.push(answerValue);
     
-    quiz10Answers = null;
-    quiz10Questions = null;
+    if (answerValue == correctAnswer) {
+        _correctCount++;
+        _quiz10Results.push(true);
+    } else if (answerValue !== null) {
+        _quiz10Results.push(false);
+    } else {
+        _questionCount--;
+        _quiz10Answers.pop();
+        _quiz10Questions.pop();
+        endQuiz10();
+    };
+
+    askNextQuestion();
+};
+
+/**
+ * Callback function for modal prompts
+ * @param {Text} answerValue String Response from dialogue
+ */
+function promptCallback(answerValue) {
+    let correctAnswer = _quiz10Correct[_quiz10Correct.length - 1];
+    _quiz10Answers.push(answerValue);
+    answerValue = tokenizeAnswer(answerValue);
+
+    if ((answerValue) && (answerValue == correctAnswer)) {
+        _correctCount++;
+        _quiz10Results.push(true);
+    } else if (answerValue !== null) {
+        _quiz10Results.push(false);
+    } else {
+        _questionCount--;
+        _quiz10Answers.pop();
+        _quiz10Questions.pop();
+        endQuiz10();
+    };
+
+    askNextQuestion();
+};
+
+function endQuiz10() {
+    displayResults(_quiz10Questions, _quiz10Correct, _quiz10Answers, _quiz10Results, _correctCount, _questionCount);
+
+    _quiz10Answers = null;
+    _quiz10Questions = null;
     quiz10Array = null;
 }
+
+/**
+ * Initializes Quiz values and starts the question/answer process.
+ */
+function startQuiz10() {
+
+    //  Setup questions
+    let quiz10Array = _questionSet;
+   
+    _quiz10Questions = [];
+    _quiz10Correct = [];
+    _quiz10Answers = [];
+    _quiz10Results = [];
+    _quiz10Shuffle = [];
+    
+    _correctCount = 0;
+    _questionIndex = -1;
+    
+    let quiz10ShuffleLock = [];
+
+    //  Shuffle Questions
+    for (let i = 0; i < quiz10Array.length; i++) {
+        let currentQuestion = quiz10Array[i];
+        let currentType = tokenizeType(currentQuestion.type);
+        let lockPosition = (currentQuestion.lockPos || !((currentType == "c") || (currentType == "p")));
+        if ((currentType == "c") || (currentType == "p")) {
+            _totalQuestions++;
+        }
+
+        _quiz10Shuffle.push(i);
+        quiz10ShuffleLock.push(lockPosition);
+    }
+
+    _quiz10Shuffle = shuffleArray(_quiz10Shuffle, quiz10ShuffleLock);
+
+    askNextQuestion();
+}
+
+
 
 //  Fisher-Yates (aka Knuth) Shuffle algorithm, modified. See https://github.com/coolaj86/knuth-shuffle.
 function shuffleArray(array, lockArray) {
@@ -195,9 +235,9 @@ function displayResults(questionArray, correctArray, answerArray, resultArray, c
     const wrongSign = "X";
 
     var msgOutput = "";
+    var percentCorrect = Math.floor((totalCount / correctCount) * 100)
+    var msgSubtitle = percentCorrect + "% answered correctly.";
     
-    msgOutput += correctCount + "/" + totalCount + " answered correctly.\n";
-
     for (var i = 0; i < questionArray.length; i++) {
         var currentQuestion = questionArray[i];
         var currentCorrection = correctArray[i];
@@ -213,5 +253,6 @@ function displayResults(questionArray, correctArray, answerArray, resultArray, c
         msgOutput += resultSign + " - " + currentQuestion + ": " + currentAnswer + " (" + currentCorrection + ")\n";
     }
 
-    alert(msgOutput);
+    // alert(msgOutput);
+    modalAlert(null, msgOutput, _QUIZ10_TITLE, msgSubtitle);
 }

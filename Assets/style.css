@@ -12,7 +12,7 @@ h1 {
 }
 h2 {
     font-size: 2.25vw;
-    line-height: 2.5vw;
+    line-height: 3vw;
     font-weight: bold;
 }
 p {
@@ -38,21 +38,6 @@ nav {
     flex-direction: row;
     align-items: center;
     z-index: 0;
-}
-
-#title-block {
-    font-family: fantasy;
-    font-weight: 200;
-    font-size: 3vw;
-    background-color: #007;
-    color: #cce;
-    padding: 2vh 2vw;
-    height: 100%;
-    z-index: 2;
-}
-
-#title-block span {
-    color: #cbe;
 }
 
 header ul {
@@ -85,6 +70,21 @@ header ul {
     font-size: 2.5vw;
     text-decoration: none;
     cursor: default;
+}
+
+#title-block {
+    font-family: 'Indie Flower', fantasy, sans-serif;
+    font-weight: 200;
+    font-size: 3vw;
+    background-color: #007;
+    color: #cce;
+    padding: 2vh 2vw;
+    height: 100%;
+    z-index: 2;
+}
+
+#title-block span {
+    color: #cbe;
 }
 
 /*          --- Main Section ---         */
@@ -239,6 +239,18 @@ footer {
     width: 80vw;
 }
 
+#form-about {
+    display: none;
+    position: absolute;
+    left: 30vh;
+    top: 25vw;
+    border: 2px solid #666;
+    border-radius: 5px;
+    box-shadow: 2vw 2vw 5vw #333;
+    z-index: 9;
+    opacity: 95%;
+}
+
 #form-modal-confirm {
     display: none;
     position: absolute;
@@ -290,20 +302,9 @@ footer {
     width: 100%;
 }
 
-/* Hide the About form */
-#form-about {
-    display: none;
-    left: 40%;
-    top:25%;
-    transform: translate(-45%,5%);
-    border: 2px solid #666;
-    border-radius: 5px;
-    box-shadow: 2vw 2vw 5vw #333;
-    z-index: 9;
-    opacity: 95%;
-}
 /* Styles for the form container */
 .form-container {
+    min-width: 200px;
     max-width: 300px;
     padding: 2vw;
     background-color: #eef;
@@ -313,6 +314,7 @@ footer {
 }
 /* Style submit/login button */
 .form-container .pop-btn {
+    display: inline;
     align-self: center;
     background-color: #5a5;
     color: #eee;

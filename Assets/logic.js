@@ -111,6 +111,9 @@ function modalAlert(callbackFunction, formText, formTitle, formSubtitle) {
         subtitleTag.textContent = formSubtitle;
     };
     if ((formText) && (typeof(formText) == "string")) {
+        while (textTag.firstChild) {
+            textTag.removeChild(textTag.firstChild);
+        };
         let innerText = formText.replace(/<br>/gim, "\n");
         let splitText = innerText.split("\n");
         splitText.forEach(textLine => {
@@ -154,6 +157,9 @@ function modalConfirm(callbackFunction, formText, formTitle, formSubtitle, formT
         subtitleTag.textContent = formSubtitle;
     };
     if ((formText) && (typeof(formText) == "string")) {
+        while (textTag.firstChild) {
+            textTag.removeChild(textTag.firstChild);
+        };
         let innerText = formText.replace(/<br>/gim, "\n");
         let splitText = innerText.split("\n");
         splitText.forEach(textLine => {
@@ -205,6 +211,9 @@ function modalPrompt(callbackFunction, formText, formDefault, formTitle, formSub
         subtitleTag.textContent = formSubtitle;
     };
     if ((formText) && (typeof(formText) == "string")) {
+        while (textTag.firstChild) {
+            textTag.removeChild(textTag.firstChild);
+        };
         let innerText = formText.replace(/<br>/gim, "\n");
         let splitText = innerText.split("\n");
         splitText.forEach(textLine => {
@@ -259,11 +268,13 @@ function alertOnClick(event) {
 
     cancelBtn.textContent = "Cancel";
 
-    trueBtn.style.display = "block";
-    falseBtn.style.display = "block";
+    trueBtn.style.display = "inline";
+    falseBtn.style.display = "inline";
     cancelBtn.removeEventListener("click", alertOnClick);
     
-    _alertCallback();
+    if (_alertCallback) {
+        _alertCallback();
+    };
 };
 
 /**
@@ -290,7 +301,9 @@ function confirmOnClick(event) {
     cancelBtn.removeEventListener("click", confirmOnClick);
     closeConfirm();
 
-    _confirmCallback(returnValue);
+    if (_confirmCallback) {
+        _confirmCallback(returnValue);
+    };
 };
 
 /**
@@ -317,7 +330,9 @@ function promptOnClick(event) {
     userInput.removeEventListener("keydown", promptOnKeyDown);
     closePrompt();
 
-    _promptCallback(returnValue);
+    if (_promptCallback) {
+        _promptCallback(returnValue);
+    };
 };
 
 /**
@@ -345,7 +360,9 @@ function promptOnKeyDown(event) {
     userInput.removeEventListener("keydown", promptOnKeyDown);
     closePrompt();
 
-    _promptCallback(returnValue);
+    if (_promptCallback) {
+        _promptCallback(returnValue);
+    };
 };
 
 /**
