@@ -10,6 +10,7 @@ media queries to shift and fit the viewer's screen size.
 
 ## Design Values
 
+```
 GIVEN a programmer needs a website
 WHEN I show the website to someone
 THEN I want it to look good on mobile
@@ -17,6 +18,7 @@ WHEN I view the structure of the HTML elements
 THEN I find that the elements follow a logical structure
 WHEN I consider elements important to SEO consideration
 THEN I find robust, concise design flow
+```
 
 ##Screenshots
 ![index page](./Assets/Images/portfolio-index.png)
