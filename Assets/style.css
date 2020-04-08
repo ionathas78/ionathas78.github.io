@@ -239,6 +239,30 @@ footer {
     width: 80vw;
 }
 
+#form-modal-confirm {
+    display: none;
+    position: absolute;
+    top: 15vh;
+    left: 10vw;
+    align-self: center;
+    height: auto;
+    width: auto;
+    max-width: 80%;
+    max-height: 70%;
+}
+
+#form-modal-prompt {
+    display: none;
+    position: absolute;
+    top: 15vh;
+    left: 10vw;
+    align-self: center;
+    height: auto;
+    width: auto;
+    max-width: 80%;
+    max-height: 70%;
+}
+
 /*          --- Pseudoelement Styles ---        */
 
 .link a:hover {
@@ -259,7 +283,9 @@ footer {
 
 /* Position the Popup form */
 .popup-form {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
     text-align: center;
     width: 100%;
 }
@@ -267,7 +293,6 @@ footer {
 /* Hide the About form */
 #form-about {
     display: none;
-    position: fixed;
     left: 40%;
     top:25%;
     transform: translate(-45%,5%);

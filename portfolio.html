@@ -132,7 +132,7 @@
 
     <section class="popup-form">
         <div id="form-about">
-          <form class="form-container">
+            <form class="form-container">
             <h1>About</h1>
             <hr>
             <h2>My Portfolio</h2>
@@ -141,12 +141,51 @@
             <p style="font-style: italic;">Footer Background Effect by <a target="_blank" href="https://wweb.dev/resources/animated-css-background-generator">Louis Hoebregts</a></p>
             <hr>
             <button id="close-about-btn" class="pop-btn" type="submit" onclick="closeAbout()">Close</button>
-          </form>
+            </form>
         </div>
-      </section>
+    </section>
 
+    <section class="popup-form">
+        <div id="form-modal-confirm">
+            <form class="form-container">
+            <h1 id="confirm-title">Confirm</h1>
+            <hr>
+            <h2 id="confirm-subtitle">----------------------------</h2>
+            <div id="confirm-text">
+                <!-- Text goes here -->
+            </div>
+            <hr>
+            <button id="confirm-btn-true" class="pop-btn modal-btn" type="submit" style="margin-bottom: 0.5vw;">True</button>
+            <button id="confirm-btn-false" class="pop-btn modal-btn" type="cancel" style="margin-bottom: 0.5vw;">False</button>
+            <br>
+            <button id="confirm-btn-cancel" class="pop-btn modal-btn" type="cancel" style="margin-top: 0.5vw;">Cancel</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="popup-form">
+        <div id="form-modal-prompt">
+            <form class="form-container">
+            <h1 id="prompt-title">Confirm</h1>
+            <hr>
+            <h2 id="prompt-subtitle">----------------------------</h2>
+            <div id="prompt-text">
+                <!-- Text goes here -->
+            </div>
+            <hr>
+            <input id="prompt-input" class="modal-input" type="text" style="width: auto;">
+            <button id="prompt-btn-submit" class="pop-btn modal-btn" type="submit" style="margin-bottom: 0.5vw;">Submit</button>
+            <button id="prompt-btn-cancel" class="pop-btn modal-btn" type="cancel" style="margin-bottom: 0.5vw;">Cancel</button>
+            </form>
+        </div>
+    </section>
+
+    
     <!-- Script Calls -->
 
     <script type="text/javascript" src="Assets/logic.js"></script>
+    <!-- <script type="text/javascript">modalConfirm(response => alert(response), "Testing\n1...\n2....<br>3.....", null, null, null, null)</script> -->
+    <!-- <script type="text/javascript">modalAlert(() => alert("OK"), "Testing\n1...\n2....<br>3.....", null, null)</script> -->
+    <!-- <script type="text/javascript">modalPrompt(response => alert(response), "Testing\n1...\n2....<br>3.....", "Hello World!", null, null, null, null)</script> -->
 </body>
 </html>
