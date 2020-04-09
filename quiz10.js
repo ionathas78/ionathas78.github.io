@@ -2,30 +2,65 @@
 //  Uses _questionSet[] from the q10_questions.js file
 
 const _TRUNCATELENGTH_FORDISPLAY = 48;
-const _QUIZ10_TITLE = "quiz10"
+const _QUIZ10_TITLE = "quiz10";
+const _RESULTS_CORRECTSIGN = "O";
+const _RESULTS_WRONGSIGN = "X";
 
-let _quiz10Questions = [];
-let _quiz10Correct = [];
-let _quiz10Answers = [];
-let _quiz10Results = [];
-let _quiz10Shuffle = [];
+let _quiz10Questions = [];          //  Shuffled, truncated questions for final display.
+let _quiz10Correct = [];            //  Shuffled, correct answers for final display.
+let _quiz10Answers = [];            //  Shuffled user answers for final display.
+let _quiz10Shuffle = [];            //  Shuffled (nonlocked) array indices for question order.
 
-let _correctCount = 0;
-let _questionIndex = -1;
-let _questionCount = 0;
 let _totalQuestions = 0;
+let _currentIndex = -1;
 
 /**
- * Advances _questionIndex, sets up the next question, and asks it.
+ * Initializes Quiz values and starts the question/answer process.
+ */
+function startQuiz10() {
+
+    //  Setup questions
+    let quiz10Array = _questionSet;
+   
+    _quiz10Questions = [];
+    _quiz10Correct = [];
+    _quiz10Answers = [];
+    _quiz10Shuffle = [];
+
+    _totalQuestions = 0;
+    _currentIndex = -1;
+    
+    let quiz10ShuffleLock = [];
+
+    //  Shuffle Questions
+    for (let i = 0; i < quiz10Array.length; i++) {
+        let currentQuestion = quiz10Array[i];
+        let currentType = tokenizeType(currentQuestion.type);
+        let lockPosition = (currentQuestion.lockPos || !((currentType == "c") || (currentType == "p")));
+        if ((currentType == "c") || (currentType == "p")) {
+            _totalQuestions++;
+        }
+
+        _quiz10Shuffle.push(i);
+        quiz10ShuffleLock.push(lockPosition);
+    }
+
+    _quiz10Shuffle = shuffleArray(_quiz10Shuffle, quiz10ShuffleLock);
+
+    askNextQuestion();
+}
+
+/**
+ * Checks asked questions array against the total, sets up the next question, and asks it.
  */
 function askNextQuestion() {
-    _questionIndex++;
+    _currentIndex++;
 
-    if (_questionIndex == _quiz10Shuffle.length) {
+    if (_currentIndex == _quiz10Shuffle.length) {
         endQuiz10();
     };
 
-    let arrayIndex = _quiz10Shuffle[_questionIndex];
+    let arrayIndex = _quiz10Shuffle[_currentIndex];
     let currentQuestion = _questionSet[arrayIndex];
     let currentPrompt = currentQuestion.question;
     let currentType = tokenizeType(currentQuestion.type);
@@ -40,10 +75,9 @@ function askNextQuestion() {
             truncatedQuestion = truncatedQuestion.substring(0, (_TRUNCATELENGTH_FORDISPLAY - 1)) + "...";
         }
 
-        _questionCount++;
         _quiz10Questions.push(truncatedQuestion);
         _quiz10Correct.push(currentAnswer);
-        questionNumber = "Question #" + _questionCount + " / " + _totalQuestions + ":\n";
+        questionNumber = "Question #" + _quiz10Questions.length + " / " + _totalQuestions + ":\n";
     } else {
         questionNumber = "*";
     }
@@ -72,6 +106,54 @@ function askNextQuestion() {
 };
 
 /**
+ * Wrap up the quiz
+ */
+function endQuiz10() {
+    displayResults(_quiz10Questions, _quiz10Correct, _quiz10Answers);
+
+    _quiz10Questions = null;
+    _quiz10Correct = null;
+    _quiz10Answers = null;
+    _quiz10Shuffle = null;
+}
+
+/**
+ * Display results of quiz to screen
+ * @param {Array} questionArray Text Array of truncated question previews
+ * @param {Array} correctArray Text Array of correct answers
+ * @param {Array} answerArray Text Array of user answers
+ */
+function displayResults(questionArray, correctArray, answerArray) {
+    let totalCount = questionArray.length;
+    let correctCount = 0;
+    let msgOutput = "";
+    let percentCorrect, msgSubtitle;
+    
+    for (let i = 0; i < questionArray.length; i++) {
+        let currentQuestion = questionArray[i];
+        let currentCorrect = correctArray[i];
+        let currentAnswer = answerArray[i];
+        let currentResult = (currentAnswer == currentCorrect);
+        let resultSign = "";
+        
+        if (currentResult) {
+            correctCount++;
+            resultSign = _RESULTS_CORRECTSIGN;
+        } else {
+            resultSign = _RESULTS_WRONGSIGN;
+        }
+        msgOutput += resultSign + " - " + currentQuestion + ": " + currentAnswer + " (" + currentCorrect + ")\n";
+    }
+
+    percentCorrect = Math.floor(totalCount * 100 / correctCount);
+    msgSubtitle = percentCorrect + "% answered correctly.\n"
+
+    modalAlert(null, msgOutput, _QUIZ10_TITLE, msgSubtitle);
+}
+
+//  **  Callback Functions
+
+/**
  * Callback function for modal alerts
  */
 function alertCallback() {
@@ -86,13 +168,7 @@ function confirmCallback(answerValue) {
     let correctAnswer = _quiz10Correct[_quiz10Correct.length - 1];
     _quiz10Answers.push(answerValue);
     
-    if (answerValue == correctAnswer) {
-        _correctCount++;
-        _quiz10Results.push(true);
-    } else if (answerValue !== null) {
-        _quiz10Results.push(false);
-    } else {
-        _questionCount--;
+    if (answerValue === null) {
         _quiz10Answers.pop();
         _quiz10Questions.pop();
         endQuiz10();
@@ -110,13 +186,7 @@ function promptCallback(answerValue) {
     _quiz10Answers.push(answerValue);
     answerValue = tokenizeAnswer(answerValue);
 
-    if ((answerValue) && (answerValue == correctAnswer)) {
-        _correctCount++;
-        _quiz10Results.push(true);
-    } else if (answerValue !== null) {
-        _quiz10Results.push(false);
-    } else {
-        _questionCount--;
+    if (answerValue === null) {
         _quiz10Answers.pop();
         _quiz10Questions.pop();
         endQuiz10();
@@ -125,57 +195,17 @@ function promptCallback(answerValue) {
     askNextQuestion();
 };
 
-function endQuiz10() {
-    displayResults(_quiz10Questions, _quiz10Correct, _quiz10Answers, _quiz10Results, _correctCount, _questionCount);
-
-    _quiz10Answers = null;
-    _quiz10Questions = null;
-    quiz10Array = null;
-}
+//  **  Utility Functions
 
 /**
- * Initializes Quiz values and starts the question/answer process.
+ * Shuffles an array
+ * Fisher-Yates (aka Knuth) Shuffle algorithm, modified. See https://github.com/coolaj86/knuth-shuffle.
+ * @param {*} array Array to shuffle
+ * @param {*} lockArray Boolean Array of positions not to shuffle
  */
-function startQuiz10() {
-
-    //  Setup questions
-    let quiz10Array = _questionSet;
-   
-    _quiz10Questions = [];
-    _quiz10Correct = [];
-    _quiz10Answers = [];
-    _quiz10Results = [];
-    _quiz10Shuffle = [];
-    
-    _correctCount = 0;
-    _questionIndex = -1;
-    
-    let quiz10ShuffleLock = [];
-
-    //  Shuffle Questions
-    for (let i = 0; i < quiz10Array.length; i++) {
-        let currentQuestion = quiz10Array[i];
-        let currentType = tokenizeType(currentQuestion.type);
-        let lockPosition = (currentQuestion.lockPos || !((currentType == "c") || (currentType == "p")));
-        if ((currentType == "c") || (currentType == "p")) {
-            _totalQuestions++;
-        }
-
-        _quiz10Shuffle.push(i);
-        quiz10ShuffleLock.push(lockPosition);
-    }
-
-    _quiz10Shuffle = shuffleArray(_quiz10Shuffle, quiz10ShuffleLock);
-
-    askNextQuestion();
-}
-
-
-
-//  Fisher-Yates (aka Knuth) Shuffle algorithm, modified. See https://github.com/coolaj86/knuth-shuffle.
 function shuffleArray(array, lockArray) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-    var isCurrentLocked, isRandomLocked;
+    let currentIndex = array.length, temporaryValue, randomIndex;
+    let isCurrentLocked, isRandomLocked;
 
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
@@ -198,22 +228,27 @@ function shuffleArray(array, lockArray) {
     return array;
 }
 
-//  Take raw string, strip spaces, and convert to lowercase.
+/**
+ * Take raw string, strip spaces, and convert to lowercase.
+ * @param {Text} answerText Text to Tokenize
+ */
 function tokenizeAnswer(answerText) {
-    var returnString = answerText;
+    let returnString = answerText;
 
     if (isString(returnString)) {
-        returnString = returnString.replace(" ", "");                
+        returnString = returnString.replace(/ /g, "");                
         returnString = returnString.toLowerCase();
     }
 
     return returnString;
 }
 
-//  Take raw string, trim leading and trailing whitespace, 
-//      extract only the first character, and convert to lowercase.
+/**
+ * Take raw string, trim leading and trailing whitespace, extract only the first character, and convert to lowercase.
+ * @param {Text} typeText Text to tokenize
+ */
 function tokenizeType(typeText) {
-    var returnString = typeText;
+    let returnString = typeText;
 
     if (isString(returnString)) {
         returnString = returnString.trim();
@@ -224,35 +259,11 @@ function tokenizeType(typeText) {
     return returnString;
 }
 
-//  True if string.
+/**
+ * True if String
+ * @param {Any} checkVar Value to check
+ */
 function isString(checkVar) {
     return (typeof(checkVar) == "string");
 }
 
-//  Report results from Quiz10 function.
-function displayResults(questionArray, correctArray, answerArray, resultArray, correctCount, totalCount) {
-    const correctSign = "O";
-    const wrongSign = "X";
-
-    var msgOutput = "";
-    var percentCorrect = Math.floor((totalCount / correctCount) * 100)
-    var msgSubtitle = percentCorrect + "% answered correctly.";
-    
-    for (var i = 0; i < questionArray.length; i++) {
-        var currentQuestion = questionArray[i];
-        var currentCorrection = correctArray[i];
-        var currentAnswer = answerArray[i];
-        var currentResult = resultArray[i];
-        var resultSign = "";
-        
-        if (currentResult) {
-            resultSign = correctSign;
-        } else {
-            resultSign = wrongSign;
-        }
-        msgOutput += resultSign + " - " + currentQuestion + ": " + currentAnswer + " (" + currentCorrection + ")\n";
-    }
-
-    // alert(msgOutput);
-    modalAlert(null, msgOutput, _QUIZ10_TITLE, msgSubtitle);
-}
