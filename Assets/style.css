@@ -308,7 +308,11 @@ footer {
     max-width: 300px;
     padding: 2vw;
     background-color: #eef;
+    border-width: 1px 2px 2px 1px;
+    border-style: solid;
+    border-color: #555;
     border-radius: 5px;
+    box-shadow: 2vw 2vw 5vw #333;
     line-height: 2.5vw;
     font-size: 1.6vw;
 }

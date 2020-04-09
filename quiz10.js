@@ -165,7 +165,6 @@ function alertCallback() {
  * @param {Boolean} answerValue True/False Response from dialogue
  */
 function confirmCallback(answerValue) {
-    let correctAnswer = _quiz10Correct[_quiz10Correct.length - 1];
     _quiz10Answers.push(answerValue);
     
     if (answerValue === null) {
@@ -182,7 +181,6 @@ function confirmCallback(answerValue) {
  * @param {Text} answerValue String Response from dialogue
  */
 function promptCallback(answerValue) {
-    let correctAnswer = _quiz10Correct[_quiz10Correct.length - 1];
     _quiz10Answers.push(answerValue);
     answerValue = tokenizeAnswer(answerValue);
 
