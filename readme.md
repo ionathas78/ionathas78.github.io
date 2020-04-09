@@ -33,7 +33,8 @@ The main page has a short bio and some visual effects. At the bottom of the bio 
 The contact page is basic and doesn't really contact anybody yet...
 The portfolio page is where you find the cool stuff. It has a retrospective gallery of projects on which I've worked, from my first web page--the fan site page I made--to the latest class project. quiz10 is a Javascript applet that shows off modal alert, confirm, and prompt forms on the page. Above that, there are a few more recent homework projects that have turned out well.
 
-##Screenshots
+## Screenshots
+
 ![index page](./Assets/Images/Index_ScreenShot.jpg)
 ![about page](./Assets/Images/About_ScreenShot.jpg)
 ![gallery page](./Assets/Images/Portfolio_ScreenShot.jpg)
