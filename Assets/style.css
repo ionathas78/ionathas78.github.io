@@ -413,4 +413,12 @@ header span:nth-child(3) {
     #about-me-card {
         height: 25vh;
     }
+
+    #contact-form {
+        height: 60vh;
+    }
+
+    #form-about {
+        left: 15%;
+    }
 }
