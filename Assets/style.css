@@ -421,4 +421,8 @@ header span:nth-child(3) {
     #form-about {
         left: 15%;
     }
+
+    #portfolio-gallery {
+        height: 60vh;
+    }
 }
