@@ -304,8 +304,8 @@ footer {
 
 /* Styles for the form container */
 .form-container {
-    min-width: 200px;
-    max-width: 300px;
+    min-width: 320px;
+    max-width: 480px;
     padding: 2vw;
     background-color: #eef;
     border-width: 1px 2px 2px 1px;
