@@ -1,4 +1,4 @@
-# 02 Unit 02 CSS and Bootstrap Homework: Responsive Portfolio
+# 02 Unit 02 CSS and Bootstrap: Responsive Portfolio
 
 > A portfolio is a vital piece of any programmer's resume, and I didn't have one.
 > It was time to fix that.
