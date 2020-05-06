@@ -31,7 +31,7 @@ THEN I find a rocking website that shows off my skill set
 
 The main page has a short bio and some visual effects. At the bottom of the bio card, you can find links to my resume, LinkedIn, and GitHub profiles. The top has page links for the portfolio and contact pages and an activation button for the info form.
 The contact page is basic and doesn't really contact anybody yet...
-The portfolio page is where you find the cool stuff. It has a retrospective gallery of projects on which I've worked, from my first web page--the fan site page I made--to the latest class project. quiz10 is a Javascript applet that shows off modal alert, confirm, and prompt forms on the page. Above that, there are a few more recent homework projects that have turned out well.
+The portfolio page is where you find the cool stuff. It has a retrospective gallery of projects on which I've worked, from my first web page--the fan site page I made--to the latest class project. quiz10 is a Javascript applet that shows off modal alert, confirm, and prompt forms on the page. Above that, there are a couple of group projects, as well as a few more recent homework projects that have turned out well.
 
 ## Screenshots
 
