@@ -14,3 +14,5 @@ function initLazyImages() {
         observer.observe(image);
     });   
 }
+
+initLazyImages();
