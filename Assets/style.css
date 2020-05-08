@@ -189,6 +189,7 @@ footer {
 .photo-card-caption p {
     font-family: 'Rock Salt', sans-serif;
     font-size: 16px;
+    line-height: 20px;
     text-align: center;
 }
 
