@@ -29,7 +29,7 @@ header {
     overflow: hidden;
     top: 0;
     left: 0;
-    background-color: #00f;
+    background-color: #00a;
 }
 
 nav {
@@ -45,6 +45,16 @@ header ul {
     padding: 1.5vw;
     list-style: none;
     height: 100%;
+}
+
+.backer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../Images/dawnydawny_fractal_2573303.jpg");
+    z-index: -2;
 }
 
 .link {
@@ -72,11 +82,15 @@ header ul {
     cursor: default;
 }
 
+.ital {
+    font-style: italic;
+}
+
 #title-block {
     font-family: 'Indie Flower', fantasy, sans-serif;
     font-weight: 200;
     font-size: 3vw;
-    background-color: #007;
+    background-color: #004;
     color: #cce;
     padding: 2vh 2vw;
     height: 100%;
@@ -102,7 +116,7 @@ footer {
     height: 4vh;
     bottom: 0;
     left: 0;
-    background: #00f;
+    background: #00a;
     color: #eee;
     text-align: center;
     overflow: hidden;
@@ -120,6 +134,7 @@ footer {
     background: #dde;
     color: #000;
     overflow: hidden;
+    box-shadow: 2vw 2vw 5vw #333;
 }
 
 .card-title {
@@ -129,7 +144,7 @@ footer {
     height: 15%;
     width: 100%;
     padding: 1vh 2vw;
-    background: #00e;
+    background: #009;
     color: #eee;
     text-align: center;
 }
@@ -150,6 +165,10 @@ footer {
     height: 10%;
     width: 100%;
     padding: 1vh 2vw;
+}
+
+.card-link {
+    margin: 0.75em 0;
 }
 
 .photo-card {
@@ -216,6 +235,13 @@ footer {
     left: 15vw; 
     height: 60vh; 
     width: 70vw;
+}
+
+#links-card {
+    top: 25vh; 
+    left: 15vw; 
+    height: 60vh; 
+    width: 60vw;
 }
 
 #portfolio-gallery {
@@ -285,11 +311,19 @@ footer {
 }
 
 .card:hover {
-    box-shadow: 2vw 2vw 5vw #333;
+    box-shadow: 1vw 1vw 3vw #333;
 }
 
 .page-form:hover {
     box-shadow: 3vw 3vw 8vw #333;
+}
+
+.card-link a:link {
+    color: #6ae
+}
+
+.card-link a:visited {
+    color: #b0f
 }
 
 /*          -- About Form --        */

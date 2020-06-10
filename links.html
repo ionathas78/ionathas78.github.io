@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta 
+        name="description" 
+        content="Nonfunctional (yet snazzy) contact page"
+    />
+    <title>My Portfolio</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Rock+Salt&family=Ubuntu&family=Indie+Flower&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/358abe3b6c.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="Assets/css/reset.css">
+    <link rel="stylesheet" href="Assets/css/style.css">
+</head>
+<body>
+    <header>
+        <!-- Motion Background from https://wweb.dev/resources/animated-css-background-generator -->
+        <!-- Credit: Louis Hoebregts -->
+        <span class="spore"></span>
+        <span class="spore"></span>
+        <span class="spore"></span>
+        <span class="spore"></span>
+
+        <nav>
+            <div id="title-block"><span>j</span>Andrews</div>
+            <ul>
+                <li class="link"><a href="index.html">Home</a></li>
+                <li class="link"><a id="about-link" onclick="openAbout()">About</a></li>
+                <li class="link"><a href="portfolio.html">Portfolio</a></li>
+                <li class="active-link"><a href="#">Links</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="backer"></div>
+        
+        <section id="links-card" class="card">
+            <article class="card-title">
+                <h1>Links</h1>
+            </article>
+            
+            <article class="card-body" style="background-color: #555; color: #eee;">
+                <div class="card-link">
+                    <i class="fas fa-envelope-open"></i>  
+                    <span style="margin: 0 0.5em;">Email:</span>
+                    <a 
+                        title="email"
+                        href="mailto:ionathas78@hotmail.com"
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                    >
+                        ionathas78@hotmail.com
+                    </a>
+                </div>
+                <div class="card-link">
+                    <i class="fab fa-linkedin-in"></i>  
+                    <span style="margin: 0 0.5em;">LinkedIn:</span>
+                    <a 
+                        title="My LinkedIn Profile"
+                        href="https://www.linkedin.com/in/ionathas78"
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                    >
+                        https://www.linkedin.com/in/ionathas78
+                    </a>
+                </div>
+                <div class="card-link">
+                    <i class="fab fa-github"></i>  
+                    <span style="margin: 0 0.5em;">GitHub:</span>
+                    <a 
+                        title="Me on GitHub"
+                        href="https://github.com/ionathas78"
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                    >
+                        https://github.com/ionathas78
+                    </a>
+                </div>
+                <div class="card-link">
+                    <i class="fab fa-itch-io"></i>  
+                    <span style="margin: 0 0.5em;">Itch.io:</span>
+                    <a 
+                        title="My itch.io Profile Page"
+                        href="https://ionathas78.itch.io"
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                    >
+                        https://ionathas78.itch.io
+                    </a>
+                </div>
+                <div class="card-link">
+                    <i class="fas fa-blog"></i>  
+                    <span style="margin: 0 0.5em;">Blog:</span>
+                    <a 
+                        title="RPG Blog"
+                        href="https://www.rpghour.com/our-thoughts"
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                    >
+                        https://www.rpghour.com/our-thoughts
+                    </a>
+                </div>
+                <div class="card-link">
+                    <i class="fas fa-blog"></i>  
+                    <span style="margin: 0 0.5em;">Blog:</span>
+                    <a 
+                        title="Experimental RPG Starter Blog"
+                        href="https://www.rpghour.com/rpgminute"
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                    >
+                        https://www.rpghour.com/rpgminute
+                    </a>
+                </div>
+                <div class="card-link">
+                    <i class="fas fa-dice-d6"></i>  
+                    <span style="margin: 0 0.5em;">Game:</span>
+                    <a 
+                        title="My Tabletop RPG"
+                        href="https://www.keluranfabula.com"
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                    >
+                        https://www.keluranfabula.com
+                    </a>
+                </div>
+                <div class="card-link">
+                    <i class="fab fa-patreon"></i>
+                    <span style="margin: 0 0.5em;">Patreon: </span>
+                    <a
+                        title="My Patreon Page"
+                        href="https://www.patreon.com/ionathas78?fan_landing=true"
+                        target="_blank"
+                        rel="noopener noreferrer" 
+                    >
+                        https://www.patreon.com/ionathas78
+                    </a>
+                </div>
+            </article>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2020 by Jonathan Andrews<span id="footer-name"></span></p>
+        <!-- Motion Background from https://wweb.dev/resources/animated-css-background-generator -->
+        <!-- Credit: Louis Hoebregts -->
+        <span class="spore"></span>
+        <span class="spore"></span>
+        <span class="spore"></span>
+        <span class="spore"></span>
+    </footer>
+
+
+    <!-- Popup Form -->
+
+    <section class="popup-form">
+        <div id="form-about">
+          <form class="form-container">
+            <h1>About</h1>
+            <hr>
+            <h2>My Portfolio</h2>
+            <p>&copy; 2020 Jonathan Andrews</p>
+            <hr>
+            <p class="ital">Footer Background Effect by <a target="_blank" href="https://wweb.dev/resources/animated-css-background-generator">Louis Hoebregts</a></p>
+            <p class="ital">
+                Background Image by 
+                <a 
+                    href="https://pixabay.com/users/dawnydawny-2157612/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2573303"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                >
+                    dawnydawny
+                </a> 
+                 from 
+                <a 
+                    href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2573303"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Pixabay
+                </a>
+            </p>
+            <hr>
+            <button id="close-about-btn" class="pop-btn" type="submit" onclick="closeAbout()">Close</button>
+          </form>
+        </div>
+      </section>
+
+    <!-- Script Calls -->
+
+    <script type="text/javascript" src="Assets/js/logic.js"></script>
+</body>
+</html>

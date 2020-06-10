@@ -29,13 +29,69 @@
                 <li class="link"><a href="index.html">Home</a></li>
                 <li class="link"><a id="about-link" onclick="openAbout()">About</a></li>
                 <li class="active-link"><a href="#">Portfolio</a></li>
-                <li class="link"><a href="contact.html">Contact</a></li>
+                <li class="link"><a href="links.html">Links</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
+        <div class="backer"></div>
+        
         <section id="portfolio-gallery">
+
+            <article class="photo-card">
+                <figure class="photo-card-image">
+                    <a href="https://github.com/Brian-Fairbanks/DiceRollerz" target="_target">
+                        <img 
+                            src="https://via.placeholder.com/250"
+                            data-src="Assets/Images/diceRollerz_ScreenShot.jpg"
+                            alt="D&D Chatroom"
+                            class="lazy-image"
+                            height="100%"
+                            width="100%"
+                        >
+                    </a>
+                </figure>
+                <figcaption class="photo-card-caption">
+                    <p>Dice Rollerz D&D-Flavored Chat</p>
+                </figcaption>
+            </article>
+
+            <article class="photo-card">
+                <figure class="photo-card-image">
+                    <a href="https://github.com/ionathas78/gBooksScanner" target="_target">
+                        <img 
+                            src="https://via.placeholder.com/250"
+                            data-src="Assets/Images/gBookScanner_ScreenShot.jpg"
+                            alt="Google Books Searcher and Bookmarker"
+                            class="lazy-image"
+                            height="100%"
+                            width="100%"
+                        >
+                    </a>
+                </figure>
+                <figcaption class="photo-card-caption">
+                    <p>gBooks Scanner</p>
+                </figcaption>
+            </article>
+
+            <article class="photo-card">
+                <figure class="photo-card-image">
+                    <a href="https://github.com/ionathas78/empDir" target="_target">
+                        <img 
+                            src="https://via.placeholder.com/250"
+                            data-src="Assets/Images/empDir_ScreenShot.jpg"
+                            alt="Unpretty but fully sortable employee directory list"
+                            class="lazy-image"
+                            height="100%"
+                            width="100%"
+                        >
+                    </a>
+                </figure>
+                <figcaption class="photo-card-caption">
+                    <p>empDir React Employee Directory</p>
+                </figcaption>
+            </article>
 
             <article class="photo-card">
                 <figure class="photo-card-image">
@@ -282,7 +338,25 @@
             <h2>My Portfolio</h2>
             <p>&copy; 2020 Jonathan Andrews</p>
             <hr>
-            <p style="font-style: italic;">Footer Background Effect by <a target="_blank" href="https://wweb.dev/resources/animated-css-background-generator">Louis Hoebregts</a></p>
+            <p class="ital">Footer Background Effect by <a target="_blank" href="https://wweb.dev/resources/animated-css-background-generator">Louis Hoebregts</a></p>
+            <p class="ital">
+                Background Image by 
+                <a 
+                    href="https://pixabay.com/users/dawnydawny-2157612/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2573303"
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                >
+                    dawnydawny
+                </a> 
+                 from  
+                <a 
+                    href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2573303"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Pixabay
+                </a>
+            </p>
             <hr>
             <button id="close-about-btn" class="pop-btn" type="submit" onclick="closeAbout()">Close</button>
             </form>
