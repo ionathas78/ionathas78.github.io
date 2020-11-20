@@ -156,6 +156,7 @@ footer {
     height: 75%;
     width: 100%;
     padding: 1vh 2vw;
+    overflow: auto;
 }
 
 .card-footer {
